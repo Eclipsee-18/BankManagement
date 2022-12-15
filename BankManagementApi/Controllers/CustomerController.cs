@@ -52,7 +52,7 @@ namespace BankManagementApi.Controllers
 			return Ok(customer);
 		}
 
-		[HttpPost]
+		[HttpPost("addCustomer")]
 		public IActionResult CreateCustomer([FromBody] CustomerMasterDto customerCreate)
 		{
 			if (customerCreate == null)
@@ -83,7 +83,7 @@ namespace BankManagementApi.Controllers
 
 		}
 
-		[HttpPut("{customerId}")]
+		[HttpPut("updateCustomer/{customerId}")]
 		public IActionResult UpdateCustomer(int customerId, [FromBody] CustomerMasterDto updatedCustomer)
 		{
 			if (updatedCustomer == null)
@@ -112,7 +112,7 @@ namespace BankManagementApi.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("{customerId}")]
+		[HttpDelete("deleteCustomer/{customerId}")]
 		public IActionResult DeleteCustomer(int customerId)
 		{
 			if (!_masterRepository.CustomerExists(customerId))

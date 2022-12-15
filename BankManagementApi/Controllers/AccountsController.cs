@@ -38,7 +38,19 @@ namespace BankManagementApi.Controllers
 			return Ok(accounts);
 		}
 
-		[HttpPost]
+		[HttpGet("{customerId}")]
+		public IActionResult GetAccountOfACustomer(int customerId)
+		{
+			var accounts = _mapper.Map<List<CustomerBalanceInfoDto>>(_balanceInfoRepository.GetAccountOfACustomer(customerId));
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+			return Ok(accounts);
+		}
+
+		[HttpPost("createAccount")]
 		public IActionResult CreateAccount([FromQuery] int customerId, [FromBody] CustomerBalanceInfoDto accountCreate)
 		{
 			if (accountCreate == null)
@@ -95,7 +107,7 @@ namespace BankManagementApi.Controllers
 			return Ok("Successfully Created");
 		}
 
-		[HttpPut("{accountId}")]
+		[HttpPut("updateAccount/{accountId}")]
 		public IActionResult UpdateAccount(int accountId, [FromBody] CustomerBalanceInfoDto updatedAccount)
 		{
 			if (updatedAccount == null)
@@ -124,7 +136,7 @@ namespace BankManagementApi.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("{accountId}")]
+		[HttpDelete("deleteAccount/{accountId}")]
 		public IActionResult DeleteAccount(int accountId)
 		{
 			if (!_balanceInfoRepository.AccountExists(accountId))
