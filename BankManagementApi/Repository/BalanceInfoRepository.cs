@@ -45,7 +45,7 @@ namespace BankManagementApi.Repository
 
 		public ICollection<CustomerBalanceInfo> GetAccountOfACustomer(int customerid)
 		{
-			return _context.CustomerBalanceInfo.Where(a => a.Customer.Id == customerid).ToList();
+			return _context.CustomerBalanceInfo.Where(a => a.Customer.Id== customerid).ToList();
 		}
 
 		public ICollection<CustomerBalanceInfo> GetAccounts()
