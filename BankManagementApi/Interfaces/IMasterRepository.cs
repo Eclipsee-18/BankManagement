@@ -1,4 +1,5 @@
 ﻿using BankManagementApi.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace BankManagementApi.Interfaces
 {
@@ -11,6 +12,8 @@ namespace BankManagementApi.Interfaces
 
 		bool CreateCustomer(CustomerMaster customer);
 		bool UpdateCustomer(CustomerMaster customer);
+
+		bool UpdateCustomerPatch(JsonPatchDocument<CustomerMaster> customer,int customerid);
 		bool DeleteCustomer(CustomerMaster customer);
 		bool Save();
 	}

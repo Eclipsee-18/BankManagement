@@ -1,6 +1,7 @@
 using BankManagementApi.Data;
 using BankManagementApi.Interfaces;
 using BankManagementApi.Repository;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
 	builder.Configuration.GetConnectionString("DefaultConnection")
 	));
+builder.Services.AddControllers().AddNewtonsoftJson();
+
+var myCors = "appCors";
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(myCors, policy =>
+	{
+		policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+	});
+});
 
 var app = builder.Build();
 
@@ -29,6 +40,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

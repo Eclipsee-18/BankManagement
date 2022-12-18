@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
+
 using BankManagementApi.Dto;
 using BankManagementApi.Interfaces;
 using BankManagementApi.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankManagementApi.Controllers
 {
+	[EnableCors("appCors")]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CustomerController : ControllerBase
@@ -51,7 +55,7 @@ namespace BankManagementApi.Controllers
 			}
 			return Ok(customer);
 		}
-
+		
 		[HttpPost("addCustomer")]
 		public IActionResult CreateCustomer([FromBody] CustomerMasterDto customerCreate)
 		{
@@ -83,21 +87,21 @@ namespace BankManagementApi.Controllers
 
 		}
 
-		[HttpPut("updateCustomer/{customerId}")]
+		[HttpPut("updateCustomer")]
 		public IActionResult UpdateCustomer(int customerId, [FromBody] CustomerMasterDto updatedCustomer)
 		{
-			if (updatedCustomer == null)
-			{
-				return BadRequest(ModelState);
-			}
-			if (customerId != updatedCustomer.Id)
-			{
-				return BadRequest(ModelState);
-			}
-			if (!_masterRepository.CustomerExists(customerId))
-			{
-				return NotFound();
-			}
+			//if (updatedCustomer == null)
+			//{
+			//	return BadRequest(ModelState);
+			//}
+			//if (customerId != updatedCustomer.Id)
+			//{
+			//	return BadRequest(ModelState);
+			//}
+			//if (!_masterRepository.CustomerExists(customerId))
+			//{
+			//	return NotFound();
+			//}
 			if (!ModelState.IsValid)
 			{
 				return BadRequest();
@@ -109,7 +113,15 @@ namespace BankManagementApi.Controllers
 				ModelState.AddModelError("", "Something went wrong updating");
 				return StatusCode(500, ModelState);
 			}
-			return NoContent();
+			return Ok("Successfully Updated");
+		}
+
+		[HttpPatch("updateCustomerPatch/{customerId}")]
+		public IActionResult UpdateCustomerPatch( [FromBody] JsonPatchDocument<CustomerMaster> updatedCustomer,[FromRoute]int customerId)
+		{
+			_masterRepository.UpdateCustomerPatch(updatedCustomer, customerId);
+			
+			return Ok();
 		}
 
 		[HttpDelete("deleteCustomer/{customerId}")]

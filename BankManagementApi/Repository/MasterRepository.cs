@@ -1,6 +1,7 @@
 ﻿using BankManagementApi.Data;
 using BankManagementApi.Interfaces;
 using BankManagementApi.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BankManagementApi.Repository
@@ -49,6 +50,15 @@ namespace BankManagementApi.Repository
 		public bool UpdateCustomer(CustomerMaster customer)
 		{
 			_context.Update(customer);
+			return Save();
+		}
+
+		public bool UpdateCustomerPatch(JsonPatchDocument<CustomerMaster> customer,int customerid)
+		{
+				
+			var cust = _context.CustomerMaster.Find(customerid);
+
+			customer.ApplyTo(cust);
 			return Save();
 		}
 	}
