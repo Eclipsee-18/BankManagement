@@ -4,9 +4,11 @@ using BankManagementApi.Interfaces;
 using BankManagementApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace BankManagementApi.Controllers
 {
+	[EnableCors("appCors")]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class AccountsController : ControllerBase

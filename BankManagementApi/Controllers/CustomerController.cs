@@ -102,10 +102,10 @@ namespace BankManagementApi.Controllers
 			//{
 			//	return NotFound();
 			//}
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
+			//if (!ModelState.IsValid)
+			//{
+			//	return BadRequest();
+			//}
 			var customerMap = _mapper.Map<CustomerMaster>(updatedCustomer);
 
 			if (!_masterRepository.UpdateCustomer(customerMap))
