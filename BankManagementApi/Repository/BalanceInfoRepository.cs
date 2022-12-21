@@ -1,8 +1,10 @@
 ﻿using BankManagementApi.Data;
 using BankManagementApi.Interfaces;
 using BankManagementApi.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System.Security.Principal;
+using System.Text.Json.Serialization.Metadata;
 
 namespace BankManagementApi.Repository
 {
@@ -50,6 +52,7 @@ namespace BankManagementApi.Repository
 
 		public ICollection<CustomerBalanceInfo> GetAccounts()
 		{
+
 			return _context.CustomerBalanceInfo.ToList();
 		}
 

@@ -52,13 +52,14 @@ namespace BankManagementApi.Controllers
 			return Ok(accounts);
 		}
 
-		[HttpPost("createAccount")]
-		public IActionResult CreateAccount([FromQuery] int customerId, [FromBody] CustomerBalanceInfoDto accountCreate)
+		[HttpPost("createAccount/{customerId}")]
+		public IActionResult CreateAccount([FromRoute] int customerId, [FromBody] CustomerBalanceInfoDto accountCreate)
 		{
 			if (accountCreate == null)
 			{
 				return BadRequest(ModelState);
 			}
+			
 
 			var accounts = _balanceInfoRepository.GetAccounts()
 				.Where(c => c.Id == accountCreate.Id).FirstOrDefault();
@@ -112,22 +113,22 @@ namespace BankManagementApi.Controllers
 		[HttpPut("updateAccount/{accountId}")]
 		public IActionResult UpdateAccount(int accountId, [FromBody] CustomerBalanceInfoDto updatedAccount)
 		{
-			if (updatedAccount == null)
-			{
-				return BadRequest(ModelState);
-			}
-			if (accountId != updatedAccount.Id)
-			{
-				return BadRequest(ModelState);
-			}
-			if (!_balanceInfoRepository.AccountExists(accountId))
-			{
-				return NotFound();
-			}
-			if (!ModelState.IsValid)
-			{
-				return BadRequest();
-			}
+			//if (updatedAccount == null)
+			//{
+			//	return BadRequest(ModelState);
+			//}
+			//if (accountId != updatedAccount.Id)
+			//{
+			//	return BadRequest(ModelState);
+			//}
+			//if (!_balanceInfoRepository.AccountExists(accountId))
+			//{
+			//	return NotFound();
+			//}
+			//if (!ModelState.IsValid)
+			//{
+			//	return BadRequest();
+			//}
 			var accountMap = _mapper.Map<CustomerBalanceInfo>(updatedAccount);
 
 			if (!_balanceInfoRepository.UpdateAccount(accountMap))

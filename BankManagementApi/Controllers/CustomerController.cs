@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 
 namespace BankManagementApi.Controllers
 {
@@ -83,7 +84,7 @@ namespace BankManagementApi.Controllers
 				ModelState.AddModelError("", "Something went wrong");
 				return StatusCode(500, ModelState);
 			}
-			return Ok("Successfully Created");
+			return Ok("Customer Added");
 
 		}
 

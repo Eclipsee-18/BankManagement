@@ -1,4 +1,6 @@
-﻿namespace BankManagementApi.Dto
+﻿
+
+namespace BankManagementApi.Dto
 {
 	public class CustomerBalanceInfoDto
 	{
@@ -6,5 +8,6 @@
 		public long Balance { get; set; }
 		public string AccountType { get; set; }
 
+			
 	}
 }
