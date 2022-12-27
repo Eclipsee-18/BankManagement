@@ -74,6 +74,29 @@ namespace BankManagementAPITests.Repository
 		}
 
 		[Fact]
+		public async void CustomerRepository_CreateCustomer_ReturnOk()
+		{
+			//Arrange
+			var customer = new CustomerMaster()
+			{
+				FullName = "Mike",
+				Address = "WDC",
+				Email = "Mike@",
+				PhoneNo = 88745,
+				Age=35
+			};
+			var dbContext = await GetDatabaseContext();
+			var customerRepository = new MasterRepository(dbContext);
+
+			//Act
+			var result = customerRepository.CreateCustomer(customer);
+
+			//Assert
+			result.Should().BeTrue();
+
+		}
+
+		[Fact]
 		public async void MasterRepository_DeleteCustomer_ReturnOk()
 		{
 			//Arrange
