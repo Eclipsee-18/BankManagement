@@ -40,7 +40,7 @@ namespace BankManagementAPITests.Repository
 		}
 
 		[Fact]
-		public async void MasterRepository_GetAccountOfACustome_ReturnAccount()
+		public async void BalanceInfoRepository_GetAccountOfACustome_ReturnAccount()
 		{
 			//Arrange
 			var customerid = 1;
@@ -56,7 +56,7 @@ namespace BankManagementAPITests.Repository
 		}
 
 		[Fact]
-		public async void CustomerRepository_CreateAccount_ReturnOk()
+		public async void BalanceInfoRepository_CreateAccount_ReturnOk()
 		{
 			//Arrange
 			var account = new CustomerBalanceInfo()
