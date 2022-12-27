@@ -1,6 +1,4 @@
-﻿using System.Security.Principal;
-
-namespace BankManagementApi.Models
+﻿namespace BankManagementApi.Models
 {
 	public class CustomerLoyaltyPoints
 	{

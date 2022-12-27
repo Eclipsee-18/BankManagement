@@ -9,7 +9,6 @@ namespace BankManagementApi.Data
 		{
 
 		}
-
 		public DbSet<CustomerMaster> CustomerMaster { get; set; }
 		public DbSet<CustomerBalanceInfo> CustomerBalanceInfo { get; set; }
 		public DbSet<CustomerLoyaltyPoints> CustomerLoyaltyPoints { get; set; }

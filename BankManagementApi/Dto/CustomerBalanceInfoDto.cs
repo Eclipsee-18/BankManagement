@@ -7,7 +7,6 @@ namespace BankManagementApi.Dto
 		public int Id { get; set; }
 		public long Balance { get; set; }
 		public string AccountType { get; set; }
-
-			
+	
 	}
 }
